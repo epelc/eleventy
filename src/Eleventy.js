@@ -1,3 +1,10 @@
+// Fix windows too many open files EMFILE error
+// Following 3 lines initing graceful-fs are required to prevent EMFILE on windows. TODO remove and find real fix.
+// This is taking 2+ min to build a 16k file project
+const realFs = require("fs");
+const gracefulFs = require("graceful-fs");
+gracefulFs.gracefulify(realFs);
+
 const { TemplatePath } = require("@11ty/eleventy-utils");
 const { performance } = require("perf_hooks");
 
